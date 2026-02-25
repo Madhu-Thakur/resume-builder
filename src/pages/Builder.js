@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+ import { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ResumeContext } from "../context/ResumeContext";
 import WizardContainer from "../components/WizardContainer";
@@ -7,11 +7,7 @@ import SectionManager from "../components/SectionManager";
 import html2pdf from "html2pdf.js";
 
 function Builder() {
-  const {
-    template,
-    setCurrentStep,
-    steps,
-  } = useContext(ResumeContext);
+  const { setCurrentStep, steps } = useContext(ResumeContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,7 +17,6 @@ function Builder() {
   const [showReorder, setShowReorder] = useState(false);
   const [showEditDropdown, setShowEditDropdown] = useState(false);
 
-  // ✅ If coming from templates → open preview
   useEffect(() => {
     if (location.state?.fromTemplates) {
       setMode("preview");
@@ -34,11 +29,11 @@ function Builder() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 p-8">
+    <div className="min-h-screen bg-gray-200">
 
       {/* ================= WIZARD MODE ================= */}
       {mode === "wizard" && (
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto py-10">
           <WizardContainer
             setMode={setMode}
             isEditing={isEditing}
@@ -49,24 +44,32 @@ function Builder() {
 
       {/* ================= PREVIEW MODE ================= */}
       {mode === "preview" && (
-        <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col min-h-screen">
 
-          <div className="flex justify-between items-center mb-6">
+          {/* ================= TOP NAVBAR ================= */}
+          <div className="h-16 bg-gray shadow-md flex items-center px-8">
+            <h1 className="text-2xl font-bold text-indigo-600 tracking-wide">
+              ElevateCV
+            </h1>
+          </div>
 
-            {/* LEFT SIDE */}
-            <div className="flex gap-4">
+          {/* ================= BODY ================= */}
+          <div className="flex flex-1">
+
+            {/* ================= LEFT SIDEBAR ================= */}
+            <div className="w-72 bg-gary shadow-md p-6 space-y-6 overflow-y-auto">
 
               {/* Edit Section */}
               <div className="relative">
                 <button
                   onClick={() => setShowEditDropdown(!showEditDropdown)}
-                  className="px-4 py-2 bg-gray-700 text-white rounded-lg"
+                  className="w-full px-4 py-2 bg-gray-800 text-white rounded-lg"
                 >
                   Edit Section ▼
                 </button>
 
                 {showEditDropdown && (
-                  <div className="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-xl p-2 z-50">
+                  <div className="mt-2 w-full bg-gray-50 shadow rounded-lg p-2">
                     {steps.map((step, index) => (
                       <button
                         key={index}
@@ -76,7 +79,7 @@ function Builder() {
                           setIsEditing(true);
                           setShowEditDropdown(false);
                         }}
-                        className="block w-full text-left px-3 py-2 rounded-lg hover:bg-gray-100"
+                        className="block w-full text-left px-3 py-2 rounded-lg hover:bg-gray-200"
                       >
                         {step.charAt(0).toUpperCase() + step.slice(1)}
                       </button>
@@ -85,48 +88,60 @@ function Builder() {
                 )}
               </div>
 
-              {/* Templates */}
-              <button
-                onClick={() => navigate("/templates")}
-                className="px-4 py-2 bg-purple-600 text-white rounded-lg"
-              >
-                Change Templates
-              </button>
+              {/* Change Template */}
+            <button
+  onClick={() =>
+    navigate("/templates", { state: { fromBuilder: true } })
+  }
+  className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg"
+>
+  Change Template
+</button>
 
-            </div>
-
-            {/* RIGHT SIDE */}
-            <div className="flex gap-4">
-
+              {/* Reorder */}
               <div className="relative">
                 <button
                   onClick={() => setShowReorder(!showReorder)}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+                  className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg"
                 >
-                  Reorder ▼
+                  Reorder Sections ▼
                 </button>
 
                 {showReorder && (
-                  <div className="absolute right-0 mt-2 w-72 bg-white shadow-xl rounded-xl p-4 z-50">
+                  <div className="mt-2 w-full bg-gray-50 shadow rounded-lg p-3">
                     <SectionManager />
                   </div>
                 )}
               </div>
 
+              {/* Download */}
               <button
                 onClick={downloadPDF}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg"
+                className="w-full px-4 py-2 bg-green-600 text-white rounded-lg"
               >
                 Download PDF
               </button>
 
             </div>
-          </div>
 
-          <div id="resume-preview">
-            <ResumePreview />
-          </div>
+            {/* ================= RIGHT PREVIEW ================= */}
+            <div className="flex-1 bg-gray-300 overflow-auto p-10">
 
+              <div className="flex justify-center items-start">
+
+                {/* Single A4 Page */}
+                <div
+                  id="resume-preview"
+                  className="bg-white shadow-2xl w-[794px] min-h-[1123px]"
+                >
+                  <ResumePreview />
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
         </div>
       )}
     </div>
