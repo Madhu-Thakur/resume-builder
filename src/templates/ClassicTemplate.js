@@ -262,7 +262,7 @@ case "certifications":
   };
 
   return (
-    <div className="bg-white shadow-xl p-8 w-[794px] min-h-[1123px] mx-auto">
+    <div className="bg-white shadow-xl p-8 w-full max-w-[794px] min-h-[1123px] mx-auto">
 
       {/* Header */}
       {/* <div className="border-b pb-4 mb-6">

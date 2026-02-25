@@ -1,14 +1,16 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback, useRef } from "react";
 
 export const ResumeContext = createContext();
 
 export const ResumeProvider = ({ children }) => {
   const [mode, setMode] = useState("fresher");
   const [currentStep, setCurrentStep] = useState(0);
+  const [isLivePreviewEnabled, setIsLivePreviewEnabled] = useState(true);
+  const [previewAnimation, setPreviewAnimation] = useState(false);
 
   const steps = [
     "personal",
-    "summary",
+    "summary", 
     "education",
     "experience",
     "skills",
@@ -32,36 +34,51 @@ export const ResumeProvider = ({ children }) => {
     interests: [],
   });
    
-const [sectionOrder, setSectionOrder] = useState([
-  "summary",
-  "experience",
-  "education",
-  "skills",
-  "projects",
-  "certifications",
-  "achievements",
-  "languages",
-  "interests"
-]);
+  const [sectionOrder, setSectionOrder] = useState([
+    "summary",
+    "experience", 
+    "education",
+    "skills",
+    "projects",
+    "certifications",
+    "achievements",
+    "languages",
+    "interests"
+  ]);
 
-  // ---------- Update Field ----------
-  const updateField = (section, value) => {
+  // Ref to track if this is an initial load
+  const isInitialLoad = useRef(true);
+
+  // ---------- Update Field with Live Preview ----------
+  const updateField = useCallback((section, value, skipAnimation = false) => {
     setResumeData((prev) => ({
       ...prev,
       [section]: value,
     }));
-  };
 
-  // ---------- Add Item ----------
-  const addItem = (section, item) => {
+    // Trigger animation for live preview
+    if (isLivePreviewEnabled && !skipAnimation && !isInitialLoad.current) {
+      setPreviewAnimation(true);
+      setTimeout(() => setPreviewAnimation(false), 300);
+    }
+  }, [isLivePreviewEnabled]);
+
+  // ---------- Add Item with Animation ----------
+  const addItem = useCallback((section, item) => {
     setResumeData((prev) => ({
       ...prev,
       [section]: [...prev[section], item],
     }));
-  };
 
-  // ---------- Remove Item ----------
-  const removeItem = (section, index) => {
+    // Trigger animation for new items
+    if (isLivePreviewEnabled) {
+      setPreviewAnimation(true);
+      setTimeout(() => setPreviewAnimation(false), 300);
+    }
+  }, [isLivePreviewEnabled]);
+
+  // ---------- Remove Item with Animation ----------
+  const removeItem = useCallback((section, index) => {
     const updated = [...resumeData[section]];
     updated.splice(index, 1);
 
@@ -69,7 +86,13 @@ const [sectionOrder, setSectionOrder] = useState([
       ...prev,
       [section]: updated,
     }));
-  };
+
+    // Trigger animation for removed items
+    if (isLivePreviewEnabled) {
+      setPreviewAnimation(true);
+      setTimeout(() => setPreviewAnimation(false), 300);
+    }
+  }, [resumeData, isLivePreviewEnabled]);
 
   // ---------- Step Navigation ----------
   const nextStep = () => {
@@ -84,17 +107,38 @@ const [sectionOrder, setSectionOrder] = useState([
     }
   };
 
+  // ---------- Live Preview Controls ----------
+  const toggleLivePreview = () => {
+    setIsLivePreviewEnabled(prev => !prev);
+  };
+
+  const triggerPreviewUpdate = useCallback(() => {
+    if (isLivePreviewEnabled) {
+      setPreviewAnimation(true);
+      setTimeout(() => setPreviewAnimation(false), 300);
+    }
+  }, [isLivePreviewEnabled]);
+
   // ---------- LocalStorage Persistence ----------
   useEffect(() => {
     const saved = localStorage.getItem("resumeData");
     if (saved) {
-      setResumeData(JSON.parse(saved));
+      const parsedData = JSON.parse(saved);
+      setResumeData(parsedData);
+      isInitialLoad.current = false;
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("resumeData", JSON.stringify(resumeData));
+    if (!isInitialLoad.current) {
+      localStorage.setItem("resumeData", JSON.stringify(resumeData));
+    }
   }, [resumeData]);
+
+  // Reset initial load flag after first render
+  useEffect(() => {
+    isInitialLoad.current = false;
+  }, []);
 
   return (
     <ResumeContext.Provider
@@ -102,7 +146,7 @@ const [sectionOrder, setSectionOrder] = useState([
         mode,
         setMode,
         currentStep,
-         setCurrentStep,
+        setCurrentStep,
         steps,
         template,
         setTemplate,
@@ -113,7 +157,13 @@ const [sectionOrder, setSectionOrder] = useState([
         nextStep,
         prevStep,
         sectionOrder,
-setSectionOrder,
+        setSectionOrder,
+        isLivePreviewEnabled,
+        setIsLivePreviewEnabled,
+        toggleLivePreview,
+        previewAnimation,
+        setPreviewAnimation,
+        triggerPreviewUpdate,
       }}
     >
       {children}

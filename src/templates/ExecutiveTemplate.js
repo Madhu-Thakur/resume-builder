@@ -6,7 +6,7 @@ function ExecutiveTemplate() {
   const { personalInfo, summary, education, experience, skills } = resumeData;
 
   return (
-    <div className="bg-white p-10 w-[794px] min-h-[1123px] mx-auto text-gray-800">
+    <div className="bg-white p-10 w-full max-w-[794px] mx-auto text-gray-800">
 
       {/* Header */}
       <div className="text-center border-b pb-6 mb-8">

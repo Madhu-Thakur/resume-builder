@@ -6,7 +6,7 @@ function CreativeTemplate() {
   const { personalInfo, summary, education, experience, skills } = resumeData;
 
   return (
-    <div className="flex w-[794px] min-h-[1123px] mx-auto bg-white shadow-lg">
+    <div className="flex w-full max-w-[794px] mx-auto bg-white shadow-lg">
 
       {/* Sidebar */}
       <div className="w-1/3 bg-indigo-700 text-white p-6">

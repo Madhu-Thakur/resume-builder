@@ -14,7 +14,7 @@ function ModernSidebarTemplate() {
   } = resumeData;
 
   return (
-    <div className="bg-white shadow-xl w-[794px] min-h-[1123px] mx-auto flex">
+    <div className="bg-white shadow-xl w-full max-w-[794px] mx-auto flex">
 
       {/* Sidebar */}
       <div className="w-1/3 bg-indigo-700 text-white p-6">

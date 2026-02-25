@@ -6,7 +6,7 @@ function CompactTemplate() {
   const { personalInfo, summary, education, experience, skills } = resumeData;
 
   return (
-    <div className="bg-white p-6 w-[794px] min-h-[1123px] mx-auto text-sm">
+    <div className="bg-white p-6 w-full max-w-[794px] mx-auto text-sm">
 
       <div className="border-b pb-2 mb-4">
         <h1 className="text-2xl font-bold">

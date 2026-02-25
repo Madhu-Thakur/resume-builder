@@ -14,7 +14,7 @@ function MinimalATSTemplate() {
   } = resumeData;
 
   return (
-    <div className="bg-white w-[794px] min-h-[1123px] mx-auto p-10 text-black">
+    <div className="bg-white w-full max-w-[794px] mx-auto p-10 text-black">
 
       {/* Header */}
       <div className="mb-6 text-center">
