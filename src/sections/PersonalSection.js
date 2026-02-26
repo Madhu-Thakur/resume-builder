@@ -24,15 +24,19 @@ function PersonalSection() {
         break;
       case 'phone':
         const phoneRegex = /^[+]?[\d\s\-\(\)]{7,}$/;
-        newErrors.phone = value && !phoneRegex.test(value) ? 'Please enter a valid phone number' : '';
+        newErrors.phone = value && !phoneRegex.test(value) ? 'Please enter a valid phone number (minimum 7 digits)' : '';
         break;
       case 'linkedin':
         const linkedinRegex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/;
-        newErrors.linkedin = value && !linkedinRegex.test(value) ? 'Please enter a valid LinkedIn URL' : '';
+        newErrors.linkedin = value && !linkedinRegex.test(value) ? 'Please enter a valid LinkedIn profile URL (e.g., linkedin.com/in/yourname)' : '';
         break;
       case 'github':
         const githubRegex = /^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9_-]+\/?$/;
-        newErrors.github = value && !githubRegex.test(value) ? 'Please enter a valid GitHub URL' : '';
+        newErrors.github = value && !githubRegex.test(value) ? 'Please enter a valid GitHub profile URL (e.g., github.com/yourusername)' : '';
+        break;
+      case 'portfolio':
+        const urlRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+        newErrors.portfolio = value && !urlRegex.test(value) ? 'Please enter a valid website URL' : '';
         break;
       default:
         break;

@@ -84,24 +84,6 @@ function ClassicTemplate() {
           </section>
         );
 
-      // case "projects":
-        return projects?.length > 0 && (
-          <section key="projects" className="mb-6">
-            <h2 className="text-xl font-semibold mb-2">
-              Projects
-            </h2>
-            {projects.map((project, index) => (
-              <div key={index} className="mb-3">
-                <h3 className="font-semibold">{project.title}</h3>
-                <p className="text-sm text-gray-500">
-                  {project.techStack}
-                </p>
-                <p>{project.description}</p>
-              </div>
-            ))}
-          </section>
-        );
-
         // ============================================
  case "projects":
   return projects?.length > 0 && (
@@ -149,57 +131,48 @@ function ClassicTemplate() {
   );
 
 
-      // case "certifications":
+      case "certifications":
         return certifications?.length > 0 && (
           <section key="certifications" className="mb-6">
             <h2 className="text-xl font-semibold mb-2">
               Certifications
             </h2>
-            <ul className="list-disc list-inside">
+
+            <div className="space-y-4">
               {certifications.map((cert, index) => (
-                <li key={index}>{cert}</li>
+                <div key={index} className="border-l-4 border-indigo-500 pl-4">
+                  <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{cert.name}</h3>
+                      <p className="text-sm text-gray-600">{cert.provider}</p>
+                    </div>
+                    {cert.validity && (
+                      <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                        {cert.validity}
+                      </span>
+                    )}
+                  </div>
+                  
+                  <div className="mt-2 flex flex-wrap gap-4 text-sm text-gray-600">
+                    {cert.completionId && (
+                      <span>Completion ID: {cert.completionId}</span>
+                    )}
+                    {cert.url && (
+                      <a
+                        href={cert.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        Verify Certificate
+                      </a>
+                    )}
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </section>
         );
-
-        // ============================================
-case "certifications":
-  return certifications?.length > 0 && (
-    <section key="certifications" className="mb-6">
-      <h2 className="text-xl font-semibold mb-2">
-        Certifications
-      </h2>
-
-      <ul className="list-disc list-inside">
-        {certifications.map((cert, index) => (
-          <li key={index}>
-            {typeof cert === "string" ? (
-              cert
-            ) : (
-              <>
-                {cert.title}
-                {cert.link && (
-                  <>
-                    {" "}
-                    —{" "}
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline"
-                    >
-                      View Certificate
-                    </a>
-                  </>
-                )}
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
 
 
       case "achievements":

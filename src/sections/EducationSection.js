@@ -18,8 +18,7 @@ function EducationSection() {
       degree: "",
       institution: "",
       startDate: "",
-      endDate: "",
-      description: ""
+      endDate: ""
     });
   };
 
@@ -74,14 +73,6 @@ function EducationSection() {
 
           </div>
 
-          <textarea
-            placeholder="Description"
-            value={edu.description}
-            onChange={(e) =>
-              handleChange(index, "description", e.target.value)
-            }
-            className="w-full mt-4 p-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
-          />
 
           <div className="flex justify-end mt-4">
             <button

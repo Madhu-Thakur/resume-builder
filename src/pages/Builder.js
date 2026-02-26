@@ -70,10 +70,12 @@ function Builder() {
         }, 500);
       }, 1000);
 
-    } catch (error) {
+      } catch (error) {
       console.error("PDF generation failed:", error);
       setIsDownloading(false);
       setDownloadProgress(0);
+      // You could add a toast notification here for better UX
+      alert("PDF generation failed. Please try again or check your browser settings.");
     }
   };
 

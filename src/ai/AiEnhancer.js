@@ -1,8 +1,5 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-
-const genAI = new GoogleGenerativeAI(
-  import.meta.env.VITE_GEMINI_API_KEY
-);
+// Frontend AI Enhancer - now uses backend API for security
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 export async function enhanceSummary(text) {
   if (!text || text.trim() === "") {
@@ -10,31 +7,23 @@ export async function enhanceSummary(text) {
   }
 
   try {
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash-lite",
+    const response = await fetch(`${API_BASE_URL}/api/enhance-summary`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
     });
 
-    const prompt = `
-You are a professional resume writing expert.
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-Rewrite the following professional summary to:
-- Be ATS-friendly
-- Use strong action verbs
-- Sound confident and impactful
-- Keep it under 120 words
-- Avoid generic phrases like "hardworking" or "seeking opportunity"
-
-Professional Summary:
-${text}
-`;
-
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-
-    return response.text().trim();
+    const data = await response.json();
+    return data.enhancedText || "AI enhancement failed. Please try again.";
 
   } catch (error) {
     console.error("AI Enhancement Error:", error);
-    return "AI enhancement failed. Please try again.";
+    return "AI enhancement failed. Please check your internet connection and try again.";
   }
 }

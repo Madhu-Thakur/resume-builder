@@ -18,55 +18,10 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen">
       
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        {/* Floating Resume Images Background */}
-        <div className="absolute inset-0">
-          <div className="relative w-full h-full">
-            {/* Resume 1 - Left */}
-            <div className="absolute left-0 top-1/4 w-1/3 h-1/2 opacity-20 transform -translate-x-10 rotate-3">
-              <img 
-                src="/images/resume1.png" 
-                alt="Resume Template 1" 
-                className="w-full h-full object-cover rounded-2xl shadow-2xl blur-sm"
-              />
-            </div>
-            
-            {/* Resume 2 - Center */}
-            <div className="absolute left-1/3 top-1/3 w-1/3 h-2/3 opacity-15 transform rotate-1">
-              <img 
-                src="/images/resume2.png" 
-                alt="Resume Template 2" 
-                className="w-full h-full object-cover rounded-2xl shadow-2xl blur"
-              />
-            </div>
-            
-            {/* Resume 3 - Right */}
-            <div className="absolute right-0 top-1/6 w-1/3 h-1/2 opacity-20 transform translate-x-10 -rotate-2">
-              <img 
-                src="/images/resume3.png" 
-                alt="Resume Template 3" 
-                className="w-full h-full object-cover rounded-2xl shadow-2xl blur-sm"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Animated Geometric Shapes */}
-        <div className="absolute -top-4 -right-4 w-96 h-96 bg-gradient-to-br from-purple-300 to-pink-300 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/3 -left-8 w-96 h-96 bg-gradient-to-br from-indigo-300 to-blue-300 rounded-full opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute bottom-10 right-1/3 w-64 h-64 bg-gradient-to-br from-green-300 to-emerald-300 rounded-full opacity-20 animate-pulse delay-500"></div>
-        
-        {/* Floating Lines */}
-        <div className="absolute top-20 left-10 w-2 h-32 bg-gradient-to-b from-indigo-400 to-transparent opacity-30 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-2 h-24 bg-gradient-to-b from-purple-400 to-transparent opacity-30 animate-pulse delay-700"></div>
-        <div className="absolute bottom-20 left-1/4 w-2 h-40 bg-gradient-to-b from-pink-400 to-transparent opacity-30 animate-pulse delay-300"></div>
-      </div>
-
-      {/* Content Overlay */}
-      <div className="relative z-10 min-h-screen bg-gradient-to-br from-white/80 via-transparent to-white/80 backdrop-blur-[2px]">
+      {/* Content */}
+      <div className="min-h-screen bg-gradient-to-br from-white/80 via-transparent to-white/80 backdrop-blur-[2px]">
         
         {/* Header Section */}
         <div className="container mx-auto px-6 py-8">

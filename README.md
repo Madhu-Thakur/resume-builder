@@ -1,70 +1,207 @@
-# Getting Started with Create React App
+# Resume Builder - ElevateCV
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, feature-rich resume builder application built with React and Tailwind CSS.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Multi-Step Wizard Interface**: Guided resume building process
+- **Live Preview**: Real-time preview with instant updates
+- **Multiple Templates**: 6+ professional resume templates
+- **Drag & Drop Sections**: Customize section order and visibility
+- **AI-Powered Enhancement**: Professional summary enhancement using Google Gemini
+- **PDF Export**: High-quality PDF generation
+- **Color & Typography Customization**: Personalize your resume design
+- **Progress Tracking**: Visual progress indicators
+- **Mobile Responsive**: Works seamlessly on all devices
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Frontend
+- React 19
+- Tailwind CSS
+- React Router
+- HTML2PDF.js
+- @dnd-kit (Drag and Drop)
+- Google Generative AI
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Backend (Optional)
+- Node.js
+- Express
+- CORS
+- Environment Variables
 
-### `npm test`
+## 📦 Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend Setup
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd resume-builder
+```
 
-### `npm run build`
+2. Install dependencies:
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Start the development server:
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend Setup (Optional - for secure AI functionality)
+1. Navigate to the server directory:
+```bash
+cd server
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install server dependencies:
+```bash
+npm install
+```
 
-### `npm run eject`
+3. Set up environment variables:
+Create a `.env` file in the `server` directory:
+```
+GEMINI_API_KEY=your-gemini-api-key-here
+PORT=3001
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. Start the backend server:
+```bash
+# Development mode
+npm run dev
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Production mode
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔧 Recent Improvements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### ✅ Code Quality Fixes
+- **Fixed duplicate code** in ClassicTemplate.js - removed redundant case blocks
+- **Enhanced error handling** - improved user-friendly error messages
+- **Improved form validation** - added comprehensive field validation with helpful error messages
+- **Added validation functions** to ResumeContext for required field checking
 
-## Learn More
+### ✅ Security Enhancements
+- **Backend API integration** - moved AI functionality to secure backend server
+- **API key protection** - removed frontend exposure of sensitive credentials
+- **Input validation** - added server-side validation for AI requests
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### ✅ User Experience Improvements
+- **Better error messages** - more descriptive feedback for users
+- **Enhanced form validation** - real-time validation with specific error messages
+- **Progress tracking** - improved completion percentage calculation
+- **Mobile optimization** - enhanced mobile menu and navigation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📁 Project Structure
 
-### Code Splitting
+```
+resume-builder/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── pages/              # Main page components
+│   ├── sections/           # Resume section components
+│   ├── templates/          # Resume template components
+│   ├── context/            # React context providers
+│   ├── ai/                 # AI functionality
+│   ├── preview/            # Preview components
+│   └── utils/              # Utility functions
+├── server/                 # Backend server (optional)
+│   ├── server.js          # Main server file
+│   ├── package.json       # Server dependencies
+│   └── README.md          # Server documentation
+└── public/                 # Static assets
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🎨 Templates
 
-### Analyzing the Bundle Size
+The application includes several professional templates:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Classic Template** - Traditional, professional layout
+2. **Compact Template** - Space-efficient design
+3. **Executive Template** - Senior-level professional
+4. **Minimal ATS Template** - ATS-friendly design
+5. **Creative Template** - Modern, creative layout
+6. **Modern Sidebar Template** - Contemporary sidebar design
 
-### Making a Progressive Web App
+## 🤖 AI Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Professional Summary Enhancement
+- Uses Google Gemini AI for content improvement
+- Enhances ATS compatibility
+- Improves action verbs and impact
+- Maintains professional tone
 
-### Advanced Configuration
+**Note**: For security, AI functionality is now handled by the backend server to protect API keys.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📱 Responsive Design
 
-### Deployment
+The application is fully responsive and provides an optimal experience across all devices:
+- Desktop: Full feature set with side panels
+- Tablet: Optimized layout with collapsible sections
+- Mobile: Streamlined interface with mobile menu
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🔧 Configuration
 
-### `npm run build` fails to minify
+### Environment Variables
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Frontend
+- `VITE_API_BASE_URL` - Backend API URL (default: http://localhost:3001)
+
+#### Backend
+- `GEMINI_API_KEY` - Google Gemini API key
+- `PORT` - Server port (default: 3001)
+
+## 🚀 Deployment
+
+### Frontend Deployment
+The frontend can be deployed to any static hosting service:
+- Vercel
+- Netlify
+- GitHub Pages
+- AWS S3
+
+### Backend Deployment
+The backend can be deployed to:
+- Heroku
+- Railway
+- Render
+- AWS EC2
+- DigitalOcean App Platform
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🆘 Support
+
+For support and questions:
+- Create an issue in the repository
+- Check the documentation in the `server/README.md` for backend setup
+- Review the code comments for implementation details
+
+## 🔄 Recent Changes
+
+### Version 1.1.0
+- ✅ Fixed duplicate code in templates
+- ✅ Enhanced error handling throughout the application
+- ✅ Improved form validation with better user feedback
+- ✅ Added backend server for secure AI functionality
+- ✅ Enhanced security by removing frontend API key exposure
+- ✅ Added comprehensive validation functions to ResumeContext
+- ✅ Improved mobile responsiveness and navigation
+
+### Version 1.0.0
+- Initial release with core resume building functionality
+- Multiple templates and customization options
+- Live preview and PDF export features

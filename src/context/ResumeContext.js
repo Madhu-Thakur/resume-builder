@@ -119,6 +119,38 @@ export const ResumeProvider = ({ children }) => {
     }
   }, [isLivePreviewEnabled]);
 
+  // ---------- Validation Functions ----------
+  const validateRequiredFields = () => {
+    const errors = {};
+    const personalInfo = resumeData.personalInfo || {};
+
+    // Check required personal info fields
+    if (!personalInfo.name || personalInfo.name.trim() === '') {
+      errors.name = 'Full name is required';
+    }
+    if (!personalInfo.email || personalInfo.email.trim() === '') {
+      errors.email = 'Email address is required';
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(personalInfo.email)) {
+        errors.email = 'Please enter a valid email address';
+      }
+    }
+
+    // Check if summary is filled (recommended but not strictly required)
+    if (!resumeData.summary || resumeData.summary.trim() === '') {
+      errors.summary = 'Professional summary is recommended for better results';
+    }
+
+    return errors;
+  };
+
+  const hasRequiredFields = () => {
+    const personalInfo = resumeData.personalInfo || {};
+    return personalInfo.name && personalInfo.name.trim() !== '' && 
+           personalInfo.email && personalInfo.email.trim() !== '';
+  };
+
   // ---------- LocalStorage Persistence ----------
   useEffect(() => {
     const saved = localStorage.getItem("resumeData");
@@ -164,6 +196,8 @@ export const ResumeProvider = ({ children }) => {
         previewAnimation,
         setPreviewAnimation,
         triggerPreviewUpdate,
+        validateRequiredFields,
+        hasRequiredFields,
       }}
     >
       {children}
