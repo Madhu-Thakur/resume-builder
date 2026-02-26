@@ -10,6 +10,8 @@ import MinimalATSTemplate from "../templates/MinimalATSTemplate";
 import CompactTemplate from "../templates/CompactTemplate";
 import CreativeTemplate from "../templates/CreativeTemplate";
 import ExecutiveTemplate from "../templates/ExecutiveTemplate";
+import GridLayoutTemplate from "../templates/GridLayoutTemplate";
+import CardLayoutTemplate from "../templates/CardLayoutTemplate";
 
 function TemplatesPage() {
   const { setTemplate } = useContext(ResumeContext);
@@ -64,6 +66,20 @@ function TemplatesPage() {
       description: "Premium layout for senior professionals",
       color: "from-indigo-600 to-purple-700",
       component: <ExecutiveTemplate /> 
+    },
+    { 
+      key: "grid", 
+      name: "Grid Layout", 
+      description: "Modern 4-column layout with organized sections",
+      color: "from-teal-500 to-cyan-600",
+      component: <GridLayoutTemplate /> 
+    },
+    { 
+      key: "card", 
+      name: "Card Layout", 
+      description: "3-row card-based design with modern aesthetics",
+      color: "from-rose-500 to-orange-600",
+      component: <CardLayoutTemplate /> 
     },
   ];
 

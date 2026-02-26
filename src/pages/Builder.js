@@ -208,12 +208,12 @@ function Builder() {
           {/* Mobile Drawer */}
           <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm z-50 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
             <div className={`fixed top-0 right-0 w-72 h-full bg-white shadow-xl transform transition-transform duration-300 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} border-l border-gray-200`}>
-              <div className="p-6">
+              <div className="h-full overflow-y-auto">
                 {/* Drawer Header */}
                 <div className="flex justify-between items-center mb-6">
                   <div className="flex items-center space-x-3">
                     <Logo size="small" />
-                    <span className="text-lg font-bold text-gray-900">ElevateCV</span>
+                    {/* <span className="text-lg font-bold text-gray-900">ElevateCV</span> */}
                   </div>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
@@ -547,10 +547,10 @@ function Builder() {
           </div>
 
           {/* ================= BODY ================= */}
-          <div className="flex flex-1">
+          <div className="flex flex-1 flex-col lg:flex-row">
 
-            {/* ================= LEFT SIDEBAR ================= */}
-            <div className="w-64 bg-white shadow-xl border-r border-gray-100 p-6 space-y-6 overflow-y-auto hidden lg:block">
+            {/* ================= LEFT SIDEBAR (Mobile: Collapsible) ================= */}
+            <div className={`lg:w-64 bg-white shadow-xl border-r border-gray-100 p-6 space-y-6 overflow-y-auto ${isMobileMenuOpen ? 'block' : 'hidden'} lg:block transition-all duration-300`}>
               
               {/* Resume Stats */}
               <CompactResumeStats />
@@ -661,7 +661,7 @@ function Builder() {
             {/* ================= CENTER PREVIEW ================= */}
             <div className="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 overflow-auto p-4 md:p-8">
               <div className="flex justify-center items-start">
-                {/* Single A4 Page with Enhanced Shadow */}
+                {/* Single A4 Page with Enhanced Shadow - Responsive Width */}
                 <div
                   id="resume-preview"
                   className="bg-white shadow-2xl border border-gray-200 w-full max-w-[794px] min-h-[1123px] mx-auto"
@@ -671,8 +671,8 @@ function Builder() {
               </div>
             </div>
 
-            {/* ================= RIGHT SIDEBAR ================= */}
-            <div className="w-80 bg-white shadow-xl border-l border-gray-100 p-6 space-y-6 overflow-y-auto hidden xl:block">
+            {/* ================= RIGHT SIDEBAR (Mobile: Hidden) ================= */}
+            <div className="w-80 bg-white shadow-xl border-l border-gray-100 p-6 space-y-6 overflow-y-auto hidden xl:block transition-all duration-300">
               
               {/* Resume Score System */}
               <ResumeScoreSystem />
